@@ -123,8 +123,8 @@ header h1 {
   height: 20px;
   object-fit: contain;
 }
-
 /* Cart sidebar styling */
+
 .cart-container {
   flex: 1;
   background-color: #fff;

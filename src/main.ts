@@ -1,18 +1,15 @@
 import "./style.css";
-import dessertData from "./product-list-with-cart-main/data.json";
+// import dessertData from "./product-list-with-cart-main/data.json";
 import { Cart } from "./Cart";
 
 function init() {
-  // Create new cart and load from local storage if available
   const cartManager = new Cart();
   cartManager.loadCart();
 
-  // Add event listeners to static HTML add to cart buttons
   document.querySelectorAll(".add-to-cart").forEach((button) => {
     button.addEventListener("click", handleStaticAddToCart);
   });
 
-  // Initialize cart display
   renderCart();
 
   // Function to handle adding items to cart from static HTML
