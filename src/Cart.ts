@@ -1,5 +1,4 @@
 export interface CartItem {
-  id: string;
   name: string;
   category: string;
   price: number;
@@ -14,7 +13,7 @@ export class CartService {
 
   constructor() {
     this.initDatabase().catch((err) =>
-      console.error("Failed to initialize database on construction", err)
+      console.error("failed to initialize database on construction", err)
     );
   }
 
@@ -36,14 +35,12 @@ export class CartService {
         console.log("Database initialized successfully");
         resolve();
       };
-
       request.onupgradeneeded = (event) => {
         const db = (event.target as IDBOpenDBRequest).result;
         if (!db.objectStoreNames.contains(this.STORE_NAME)) {
           db.createObjectStore(this.STORE_NAME, {
-            keyPath: "id",
+            keyPath: "name",
           });
-          // console.log("Object store created");
         }
       };
     });
@@ -76,7 +73,7 @@ export class CartService {
           request.onsuccess = () => {
             itemsProcessed++;
             if (itemsProcessed === cart.length) {
-              // This resolve was inside the loop, should be in transaction.oncomplete
+              resolve();
             }
           };
         });

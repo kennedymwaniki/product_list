@@ -16,9 +16,10 @@ button {
   align-items: center;
 }
 @media (width >= 1000px) {
-  .dessert-container {
+  .desserts-container {
     display: grid !important;
     grid-template-columns: 300px 300px 300px;
+    gap: 16px;
   }
   .your-cart {
     margin-top: 32px;
@@ -276,9 +277,9 @@ button {
   align-items: center;
   justify-content: center;
 }
-@media (width <= 500px) {
+@media (width <= 640px) {
   .order-confirmed {
-    align-items: end;
+    align-items: self-end;
   }
 }
 .order-confirmed-container {
