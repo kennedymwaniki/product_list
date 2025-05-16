@@ -6,7 +6,6 @@ interface Dessert {
   price: number;
   image: {
     mobile: string;
-    // [key: string]: string;
   };
 }
 
@@ -345,13 +344,12 @@ class DesertApp {
     }
     const totalElement = document.querySelector<HTMLElement>("#total");
     if (totalElement) {
-      const totalItems = CartService.getTotalItems(this.cart); // Use static method from CartService
+      const totalItems = CartService.getTotalItems(this.cart);
       totalElement.textContent = totalItems.toString();
     }
   }
 }
 
-// Create a single instance and expose methods for inline event handlers
 const app = new DesertApp();
 
 (window as any).app = app;
