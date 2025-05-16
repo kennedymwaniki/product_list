@@ -26,7 +26,7 @@ class DesertApp {
       await this.cartService.initDatabase();
       const [storedCart, data] = await Promise.all([
         this.cartService.loadCart(),
-        fetch("src/data.json").then((res) => res.json()),
+        fetch("/data.json").then((res) => res.json()),
       ]);
       this.cart = storedCart;
       this.allItems = data;
@@ -59,7 +59,7 @@ class DesertApp {
                 <button class="add-to-cart-btn" onclick='app.addToCart("${
                   dessert.name
                 }")'>
-                  <img src="src/public/images/icon-add-to-cart.svg" alt="cart" class="add-to-cart-image">
+                  <img src="/images/icon-add-to-cart.svg" alt="cart" class="add-to-cart-image">
                   <p>Add to Cart</p>
                 </button>
               </div>
@@ -75,7 +75,7 @@ class DesertApp {
 
   async loadData(): Promise<void> {
     try {
-      const response = await fetch("src/data.json");
+      const response = await fetch("/data.json");
       const data: Dessert[] = await response.json();
       this.allItems = data;
       this.renderItems();
@@ -198,7 +198,7 @@ class DesertApp {
               <button class="clear-btn" onclick='app.clearItem("${
                 cartItem.name
               }")'>
-                <img src="src/public/images/icon-remove-item.svg" alt="remove">
+                <img src="/images/icon-remove-item.svg" alt="remove">
               </button>
             </div>
           </div>`;
@@ -214,7 +214,7 @@ class DesertApp {
         </div>
         <!--Carbon Neutral-->
         <div class="carbon-neutral">
-          <img src="src/public/images/icon-carbon-neutral.svg" alt="tree">
+          <img src="/images/icon-carbon-neutral.svg" alt="tree">
           <p>This is a <span class='carb-neu-font'>carbon-neutral</span> delivery</p>
         </div>
       
@@ -287,7 +287,7 @@ class DesertApp {
     const cntr = document.querySelector<HTMLElement>(".empty-cart");
     if (cntr) {
       cntr.innerHTML = `<div class="empty-cart">
-          <img src="src/public/images/illustration-empty-cart.svg" alt="empty" >
+          <img src="/images/illustration-empty-cart.svg" alt="empty" >
           <p>Your added items will appear here</p>
         </div>`;
     }
@@ -328,18 +328,18 @@ class DesertApp {
       if (imgCntr) imgCntr.style.border = "2px solid hsl(14, 86%, 42%)";
       btnContainer.innerHTML = `<div class="control-btn">
             <button class="control" onclick="app.remove('${itemName}')">
-              <img src="src/public/images/icon-decrement-quantity.svg" alt="remove">
+              <img src="/images/icon-decrement-quantity.svg" alt="remove">
             </button>
             <p id="quantity-${elementId}" class="quantity">${cartItem.quantity}</p>
             <button class="control" onclick="app.add('${itemName}')">
-              <img src="src/public/images/icon-increment-quantity.svg" alt="add">
+              <img src="/images/icon-increment-quantity.svg" alt="add">
             </button>
           </div>`;
     } else {
       const imgCntr = dessertElement.querySelector<HTMLElement>(".image");
       if (imgCntr) imgCntr.style.border = "none";
       btnContainer.innerHTML = `<button class="add-to-cart-btn" onclick='app.addToCart("${itemName}")'>
-          <img src="src/public/images/icon-add-to-cart.svg" alt="cart" class="add-to-cart-image">
+          <img src="/images/icon-add-to-cart.svg" alt="cart" class="add-to-cart-image">
           <p>Add to Cart</p>
         </button>`;
     }
