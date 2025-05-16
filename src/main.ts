@@ -7,65 +7,44 @@ function init() {
   const cartManager = new Cart();
   cartManager.loadCart();
 
-  const _isCartEmpty = cartManager.cart.length === 0;
+  // Add event listeners to static HTML add to cart buttons
+  document.querySelectorAll(".add-to-cart").forEach((button) => {
+    button.addEventListener("click", handleStaticAddToCart);
+  });
 
-  renderDesserts();
-
+  // Initialize cart display
   renderCart();
 
-  // Function to render all desserts
-  function renderDesserts() {
-    document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
-      <h1>Desserts</h1>
-      <div class="desserts">
-        ${dessertData
-          .map(
-            (dessert, index) => `
-              <div class="dessert" data-id="${index}">
-                <img src="${dessert.image.desktop.replace(
-                  "../../public",
-                  "/public"
-                )}" alt="${dessert.name}" />
-                <div class="dessert-info">
-                  <p class="category">${dessert.category}</p>
-                  <h2>${dessert.name}</h2>
-                  <p class="price">$${dessert.price.toFixed(2)}</p>
-                  <button class="add-to-cart" data-id="${index}">
-                    <img src="/public/images/icon-add-to-cart.svg" alt="cart icon" />
-                    <span>Add to cart</span>
-                  </button>
-                </div>
-              </div>
-            `
-          )
-          .join("")}
-      </div>
-    `;
-
-    document.querySelectorAll(".add-to-cart").forEach((button) => {
-      button.addEventListener("click", handleAddToCart);
-    });
-  }
-
-  function handleAddToCart(e: Event) {
+  // Function to handle adding items to cart from static HTML
+  function handleStaticAddToCart(e: Event) {
     e.preventDefault();
     const target = e.currentTarget as HTMLButtonElement;
-    const id = target.getAttribute("data-id");
+    const id = target.closest(".dessert")?.getAttribute("data-id") || "";
     const dessertElement = target.closest(".dessert");
 
     if (id && dessertElement) {
-      const dessert = dessertData[parseInt(id)];
+      const dessertName = dessertElement.querySelector("h2")?.textContent || "";
+      const dessertCategory =
+        dessertElement.querySelector("p")?.textContent || "";
+      const priceString =
+        dessertElement.querySelector("p:nth-of-type(2)")?.textContent || "0";
+      const dessertPrice = parseFloat(priceString);
+      const dessertImage =
+        dessertElement.querySelector("img")?.getAttribute("src") || "";
 
+      // Add item to cart
       cartManager.addItem(
         id,
-        dessert.name,
-        dessert.category,
-        dessert.price,
-        dessert.image.thumbnail.replace("../../public", "/public")
+        dessertName,
+        dessertCategory,
+        dessertPrice,
+        dessertImage
       );
 
+      // Update cart UI
       renderCart();
 
+      // Add animation or feedback
       target.classList.add("added");
       setTimeout(() => {
         target.classList.remove("added");
@@ -73,10 +52,12 @@ function init() {
     }
   }
 
+  // We're working with static HTML only, so no need for the handleAddToCart function
+
   function renderCart() {
     const cartElement = document.querySelector<HTMLDivElement>("#cart")!;
 
-    if (_isCartEmpty) {
+    if (cartManager.cart.length === 0) {
       cartElement.innerHTML = `
         <div class="cart-header">
           <h2>Your Cart</h2>

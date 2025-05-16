@@ -53,10 +53,8 @@ header h1 {
 .dessert {
   background-color: #fff;
   border-radius: 8px;
-  width: 300px;
-  margin-left: 40px;
-  height: 500px;
-  margin-top: 8px;
+  width: 100%;
+  height: auto;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
