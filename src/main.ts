@@ -59,7 +59,7 @@ function init() {
           <span class="cart-count">0</span>
         </div>
         <div class="empty-cart">
-          <img src="/public/images/illustration-empty-cart.svg" alt="Empty cart" />
+          <img src="src/public/images/illustration-empty-cart.svg" alt="Empty cart" />
           <p>Your cart is empty</p>
         </div>
       `;
