@@ -46,7 +46,7 @@ header h1 {
   grid-template-rows: 200px 2fr;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 2rem;
-  flex: 3;
+  flex: 2;
 }
 
 /* Individual dessert card styling */
@@ -78,22 +78,27 @@ header h1 {
 .dessert p.category {
   color: #777;
   font-size: 0.9rem;
+  padding: 3px;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 0.5rem;
+  margin-left: 4px;
 }
 
 .dessert h2 {
   font-size: 1.5rem;
   margin-bottom: 0.75rem;
   font-weight: 600;
+  padding: 3px;
+  margin-left: 4px;
   color: #333;
 }
 
-.dessert p.price {
+.dessert p {
   font-size: 1.2rem;
   color: #e74c3c;
   font-weight: 600;
+  margin-left: 4px;
   margin-bottom: 1rem;
 }
 

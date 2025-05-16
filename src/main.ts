@@ -49,8 +49,6 @@ function init() {
     }
   }
 
-  // We're working with static HTML only, so no need for the handleAddToCart function
-
   function renderCart() {
     const cartElement = document.querySelector<HTMLDivElement>("#cart")!;
 
